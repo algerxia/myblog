@@ -5,6 +5,7 @@ from .adminforms import PostAdminForm
 from typeidea.custom_site import custom_site
 from .models import Category, Post, Tag
 from typeidea.base_admin import BaseOwnerAdmin
+from django.contrib.admin.models import LogEntry
 
 
 # import requests
@@ -155,3 +156,8 @@ class PostAdmin(BaseOwnerAdmin):
             'all': ("https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css",),
         }
         js = ('https://cdm.bootcss.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.js',)
+
+
+@admin.register(LogEntry, site=custom_site)
+class LogEntryAdmin(admin.ModelAdmin):
+    list_display = ['object_repr', 'object_id', 'action_flag', 'user', 'change_message']

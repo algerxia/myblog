@@ -13,19 +13,18 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from blog import views as bv
-from config import views as cv
+from blog.views import post_list, post_detail
+from config.views import links
 from django.contrib import admin
 from django.conf.urls import url
 from typeidea.custom_site import custom_site
 
 urlpatterns = [
-    url(r'^admin/', custom_site.urls),
-    url(r'^$', bv.post_list),
-    url(r'^category/(?P<category_id>\d+)/$', bv.post_list),
-    url(r'^tag/(?P<tag_id>\d+)/$', bv.post_list),
-    url(r'^post/(?P<post_id>\d+)/$', bv.post_list),
-    url(r'^links/$', cv.links),
+    url(r'^$', post_list),
+    url(r'^category/(?P<categpry_id>\d+)/$', post_list),
+    url(r'^tag/(?P<tag_id>\d+)/$', post_detail),
+    url(r'^post/(?P<post_id>\d+).html$', post_detail),
+    url(r'^links/$', links),
     url(r'^super_admin/', admin.site.urls),
-
+    url(r'^admin/', custom_site.urls),
 ]
