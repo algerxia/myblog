@@ -27,7 +27,7 @@ class IndexView(ListView):
 
 class CategoryView(IndexView):
     def get_context_data(self, **kwargs):
-        context = super(CategoryView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         category_id = self.kwargs.get('category_id')
         category = get_object_or_404(Category, pk=category_id)
         context.update({
@@ -36,7 +36,6 @@ class CategoryView(IndexView):
         return context
 
     def get_queryset(self):
-        '''重写queryset,根据标签过滤'''
         queryset = super().get_queryset()
         category_id = self.kwargs.get('category_id')
         return queryset.filter(category__id=category_id)
@@ -48,12 +47,11 @@ class TagView(IndexView):
         tag_id = self.kwargs.get('tag_id')
         tag = get_object_or_404(Tag, pk=tag_id)
         context.update({
-            'tag':tag,
+            'tag': tag,
         })
         return context
 
     def get_queryset(self):
-        '''重写queryset，根据标签过滤'''
         queryset = super().get_queryset()
         tag_id = self.kwargs.get('tag_id')
         return queryset.filter(tag__id=tag_id)
