@@ -23,8 +23,9 @@
                         </li>
                     {% endfor %}
                 </ul>
-                <form action="GET" class="form-inline my-2 my-lg-0">
-                    <input type="submit" class="form-control mr-sm-2" placeholder="Search" aria-label="Search">
+                <form action="/search/" class="form-inline" method="GET">
+                    <input type="search" class="form-control" name="keyword" placeholder="Search" aria-label="Search"
+                           value="{{keyword}}">
                     <button class="btn btn-outline-success" type="submit">搜索</button>
                 </form>
             </div>
